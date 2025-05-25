@@ -1,3 +1,5 @@
+<?php get_header(); ?>
+
 <?php while (have_posts()): the_post(); ?>
 
 <h1>This is a page not post</h1>
@@ -6,3 +8,4 @@
 <hr>
 <?php endwhile; ?>    
 
+<?php get_footer(); ?>
