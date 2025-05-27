@@ -29,15 +29,27 @@
     <?php endif; ?>
 
     
-    <!--
+    
     <div class="page-links">
-      <h2 class="page-links__title"><a href="#">About Us</a></h2>
+      <h2 class="page-links__title"><a href="<?php echo get_permalink($theParent); ?>"><?php echo get_the_title($theParent) ?></a></h2>
       <ul class="min-list">
-        <li class="current_page_item"><a href="#">Our History</a></li>
-        <li><a href="#">Our Goals</a></li>
+        <?php
+        
+          if ($theParent != 0) {
+            $findChildrenOf = $theParent;
+          } else {
+            $findChildrenOf = get_the_ID();  
+          }
+          wp_list_pages([
+            'title_li' => null,
+            'child_of' => $findChildrenOf
+          ]);
+        ?>
+        <!-- <li class="current_page_item"><a href="#">Our History</a></li>
+        <li><a href="#">Our Goals</a></li> -->
       </ul>
     </div>
-    -->
+   
 
     <div class="generic-content">
       <?php the_content(); ?>
