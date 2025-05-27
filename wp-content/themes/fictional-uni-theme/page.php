@@ -30,26 +30,37 @@
 
     
     
-    <div class="page-links">
-      <h2 class="page-links__title"><a href="<?php echo get_permalink($theParent); ?>"><?php echo get_the_title($theParent) ?></a></h2>
-      <ul class="min-list">
-        <?php
-        
-          if ($theParent != 0) {
-            $findChildrenOf = $theParent;
-          } else {
-            $findChildrenOf = get_the_ID();  
-          }
-          wp_list_pages([
-            'title_li' => null,
-            'child_of' => $findChildrenOf
-          ]);
-        ?>
-        <!-- <li class="current_page_item"><a href="#">Our History</a></li>
-        <li><a href="#">Our Goals</a></li> -->
-      </ul>
-    </div>
-   
+    <?php
+      if ($theParent != 0) {
+        $findChildrenOf = $theParent;
+      } else {
+        $findChildrenOf = get_the_ID();  
+      }   
+
+      $childPages = get_pages([
+        'child_of' => $findChildrenOf,
+        'parent' => $findChildrenOf,
+        'sort_column' => 'menu_order'
+      ]);   
+
+      if (!empty($childPages)) :
+    ?>
+      <div class="page-links">
+        <h2 class="page-links__title">
+          <a href="<?php echo get_permalink($theParent); ?>">
+            <?php echo get_the_title($theParent); ?>
+          </a>
+        </h2>
+        <ul class="min-list">
+          <?php
+            wp_list_pages([
+              'title_li' => null,
+              'child_of' => $findChildrenOf
+            ]);
+          ?>
+        </ul>
+      </div>
+    <?php endif; ?>
 
     <div class="generic-content">
       <?php the_content(); ?>
