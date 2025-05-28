@@ -26,6 +26,13 @@
         </p>
       </div> 
     </div>
-  <?php endwhile; ?>
-</div>
+    <?php endwhile; 
+
+      echo paginate_links();
+
+    ?>
+
+  </div>
+
+
 <?php get_footer(); ?>
