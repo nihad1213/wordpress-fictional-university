@@ -39,7 +39,6 @@ function university_post_types() {
   register_post_type('professor', array(
     'show_in_rest' => true,
     'supports' => array('title', 'editor'),
-    'rewrite' => array('slug' => 'professors'),
     'public' => true,
     'labels' => array(
       'name' => 'Professors',
